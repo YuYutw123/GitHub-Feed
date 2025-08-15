@@ -126,4 +126,4 @@ nextBtn.addEventListener("click", () => {
     displayRepo(true);
 });
 
-displayRepo();
+// displayRepo();
