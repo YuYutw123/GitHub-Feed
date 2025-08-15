@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Star Scout",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "Randomly recommends a GitHub repository every hour.",
     "permissions": ["storage", "alarms"],
     "background": {
@@ -15,7 +15,5 @@
             "128": "img/icon_128.png"
         }
     },
-    "host_permissions": [
-        "https://api.github.com/*"
-    ]
+    "host_permissions": ["https://api.github.com/*"]
 }

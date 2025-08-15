@@ -8,3 +8,8 @@ Star-Scout is a Chrome extension that recommends a random trending new GitHub re
 
 -   Recommends a random trending new repository every hour
 -   Displays repository name, description, language, stars, owner avatar, and last updated time
+
+## Special thanks
+
+-   ChatGPT
+-   Copilot
