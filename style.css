@@ -80,6 +80,7 @@ h1.title {
     font-weight: bold;
     transition: background 0.2s;
 }
+
 .next-btn:hover {
     background: #2c974b;
 }
