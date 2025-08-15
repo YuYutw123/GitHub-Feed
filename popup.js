@@ -7,6 +7,7 @@ const nextBtn = document.getElementById("next-btn");
 let cooldownTimer = null;
 
 function startCooldown(lastShownTime) {
+    if (cooldownTimer) clearInterval(cooldownTimer);
     const now = Date.now();
     const remaining = COOLDOWN_MS - (now - lastShownTime);
 
@@ -46,9 +47,9 @@ function getLanguageColor(language) {
         Go: "#00ADD8",
         Rust: "#dea584",
         HTML: "#e34c26",
-        CSS: "#563d7c"
+        CSS: "#563d7c",
     };
-    return colors[language] || "#ededed"; // Defalut to light gray if unknown
+    return colors[language] || "#ededed"; // Default to light gray if unknown
 }
 
 function updateCooldownBar(timeLeft, total) {
@@ -60,15 +61,21 @@ function updateCooldownBar(timeLeft, total) {
 }
 
 async function getRandomRepoFromPool(forceRefresh = false) {
-    const { repoPool, lastShownRepo, lastShownTime } = await chrome.storage.local.get([
-        "repoPool",
-        "lastShownRepo",
-        "lastShownTime"
-    ]);
+    const { repoPool, lastShownRepo, lastShownTime } =
+        await chrome.storage.local.get([
+            "repoPool",
+            "lastShownRepo",
+            "lastShownTime",
+        ]);
 
     const now = Date.now();
 
-    if (!forceRefresh && lastShownRepo && lastShownTime && now - lastShownTime < COOLDOWN_MS) {
+    if (
+        !forceRefresh &&
+        lastShownRepo &&
+        lastShownTime &&
+        now - lastShownTime < COOLDOWN_MS
+    ) {
         startCooldown(lastShownTime);
         return lastShownRepo;
     }
@@ -84,7 +91,7 @@ async function getRandomRepoFromPool(forceRefresh = false) {
 
         await chrome.storage.local.set({
             lastShownRepo: newRepo,
-            lastShownTime: now
+            lastShownTime: now,
         });
 
         startCooldown(now);
@@ -102,23 +109,33 @@ async function displayRepo(forceRefresh = false) {
         card.innerHTML = `
             <div class="repo-header">
                 <div class="owner">
-                    <img src="${repo.owner.avatar_url}" alt="avatar" class="avatar">
-                    <a href="${repo.html_url}" target="_blank" class="repo-name">${repo.full_name}</a>
+                    <img src="${
+                        repo.owner.avatar_url
+                    }" alt="avatar" class="avatar">
+                    <a href="${
+                        repo.html_url
+                    }" target="_blank" class="repo-name">${repo.full_name}</a>
                 </div>
                 <span class="stars">⭐ ${repo.stargazers_count}</span>
             </div>
             <p class="description">${repo.description || "No description"}</p>
             <div class="repo-footer">
                 <span class="lang">
-                    <span class="lang-dot" style="background:${getLanguageColor(repo.language)}"></span>
+                    <span class="lang-dot" style="background:${getLanguageColor(
+                        repo.language
+                    )}"></span>
                     ${repo.language || "Unknown language"}
                 </span>
-                <span class="updated">Updated at ${new Date(repo.updated_at).toLocaleDateString()}</span>
+                <span class="updated">Updated at ${new Date(
+                    repo.updated_at
+                ).toLocaleDateString()}</span>
             </div>
         `;
     } catch (err) {
         console.error(err);
-        document.getElementById("repo-card").innerHTML = `<p class="error">"Failed to load or no data available"</p>`;
+        document.getElementById(
+            "repo-card"
+        ).innerHTML = `<p class="error">Failed to load or no data available</p>`;
     }
 }
 
@@ -127,3 +144,4 @@ nextBtn.addEventListener("click", () => {
 });
 
 // displayRepo();
+displayRepo();
