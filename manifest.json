@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "Daily Random GitHub Recommender",
+    "name": "Github Repo Recommender",
     "version": "1.0",
     "description": "Randomly recommends a GitHub repository every hour.",
     "permissions": ["storage", "alarms"],
