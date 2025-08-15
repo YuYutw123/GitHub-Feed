@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Feed</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="title">✨ Today's Recommendation</h1>
+
+    <div id="repo-card" class="card">
+        <p>Loading...</p>
+    </div>
+
+    <button id="next-btn" class="next-btn">Want more?</button>
+
+    <div id="cooldown" class="cooldown">
+        <div id="cooldown-bar" class="cooldown-bar"></div>
+        <span id="cooldown-text" class="cooldown-text"></span>
+    </div>
+
+    <div class="footer">
+        <small>Recommend a GitHub Repo per hour for you</small>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

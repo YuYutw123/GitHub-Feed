@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Daily Random GitHub Recommender",
+    "version": "1.0",
+    "description": "Randomly recommends a GitHub repository every hour.",
+    "permissions": ["storage", "alarms"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "img/icon_16.png",
+            "48": "img/icon_48.png",
+            "128": "img/icon_128.png"
+        }
+    },
+    "host_permissions": [
+        "https://api.github.com/*"
+    ]
+}
